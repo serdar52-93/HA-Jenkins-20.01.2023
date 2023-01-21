@@ -1,29 +1,19 @@
 pipeline {
-    agent any
-    tools { 
-        maven 'Maven 3.8.7' 
-        jdk 'jdk17' 
+  agent any
+  tools {
+    maven 'maven-3.6.3' 
+  }
+  stages {
+    stage ('Build') {
+      steps {
+        sh 'mvn clean package'
+      }
     }
-    stages {
-        stage ('Initialize') {
-            steps {
-                sh '''
-                    echo "PATH = ${PATH}"
-                    echo "M2_HOME = ${M2_HOME}"
-                ''' 
-            }
-        }
 
-        stage ('Build') {
-            steps {
-                echo 'This is a minimal pipeline.'
-            }
-        }
-
-        stage ('Test') {
-            steps {
-                echo 'das ist ein Test für mvn'
-            }
+    stage ('Test') {
+        steps {
+           echo 'mvn -version'
         }
     }
+  }
 }
