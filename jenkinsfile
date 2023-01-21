@@ -1,23 +1,25 @@
 pipeline {
     agent any
-    tools { 
-        maven 'maven-3.8.6' 
-    }
+    
     stages {
-        stage('Checkout git') {
+        stage('Hello Jenkins') {
             steps {
-               git branch: 'sonar', url: 'https://github.com/logicopslab/java-web-app'
+                echo 'Hello Jenkins'
             }
         }
-        
-        stage ('Build & Test') {
+        stage('Build') {
             steps {
-                sh 'mvn install' 
+                sh 'mvn -B -DskipTests clean package'
+            }
+        }
+        stage('test') {
+            steps {
+                sh 'mvn test'
             }
             post {
-               success {
-                    junit 'target/surefire-reports/**/*.xml'
-                }   
+                always {
+                    junit 'target/surefire-reports/*.xml' 
+                }
             }
         }
     }
