@@ -1,7 +1,7 @@
 pipeline {
   agent any
   tools {
-    maven 'maven-3.6.3' 
+    maven 'maven-3.8.7' 
   }
   stages {
     stage ('Build') {
@@ -12,8 +12,15 @@ pipeline {
 
     stage ('Test') {
         steps {
-           echo 'mvn -version'
+         echo "Test" 
+         sh 'mvn test'
         }
     }
+
+    stage('Deploy') { 
+        steps {   
+         echo "Deploy" 
+        }
+    } 
   }
 }
