@@ -1,26 +1,10 @@
 pipeline {
-    agent any
-    
+    agent { dockerfile true }
     stages {
-        stage('Hello Jenkins') {
+        stage('Example') {
             steps {
-                echo 'Hello Jenkins'
-            }
-        }
-        stage('Build') {
-            steps {
-                sh 'mvn -B -DskipTests clean package'
-            }
-        }
-        stage('test') {
-            steps {
-                sh 'mvn test'
-            }
-            post {
-                always {
-                    junit 'target/surefire-reports/*.xml' 
-                }
-            }
+             echo 'Hello World! Docker image'
+           }
         }
     }
 }
