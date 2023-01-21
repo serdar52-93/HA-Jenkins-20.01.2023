@@ -1,10 +1,28 @@
 pipeline {
     agent any
-    
+    tools { 
+        maven 'Maven 3.8.7' 
+        jdk 'jdk17' 
+    }
     stages {
-        stage('Hello Jenkins') {
+        stage ('Initialize') {
             steps {
-                echo 'Hello Jenkins'
+                sh '''
+                    echo "PATH = ${PATH}"
+                    echo "M2_HOME = ${M2_HOME}"
+                ''' 
+            }
+        }
+
+        stage ('Build') {
+            steps {
+                echo 'This is a minimal pipeline.'
+            }
+        }
+
+        stage ('Test') {
+            steps {
+                echo 'das ist ein Test für mvn'
             }
         }
     }
