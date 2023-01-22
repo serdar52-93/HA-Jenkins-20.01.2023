@@ -1,0 +1,18 @@
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                echo 'mvn installation'
+                sh "mvn package"
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo 'test von mvn'
+                sh "mvn test"
+            }
+        }
+    }
+}
